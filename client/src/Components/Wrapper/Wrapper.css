@@ -1,0 +1,8 @@
+.wrapper {
+    margin: auto;
+    background: #17183B;
+    min-height: 100vh;
+    overflow: hidden;
+    max-width: 1200px;
+
+}

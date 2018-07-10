@@ -1,0 +1,19 @@
+.btn {
+    float: left;
+    border-radius: 0%;
+    border: 1px solid darkgray;
+    width: 50%;
+    height: 75px;
+}
+
+#signin:hover {
+    background: white;
+    border:none;
+    color:black;
+}
+
+#login:hover {
+    background: white;
+    border:none;
+    color:black;
+}

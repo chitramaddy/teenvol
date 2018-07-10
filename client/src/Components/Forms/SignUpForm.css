@@ -1,0 +1,35 @@
+.form {    
+    margin-top: 100px;
+    min-height: 300px;  
+    padding-top: 100px;  
+  }
+  
+  .form input {
+    display: flex;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 50%;
+    background: none;
+    color: white;
+    font-size: 18px;
+    border-bottom: 1 px;
+  }
+
+  .form button {
+    display: flex;
+    margin: auto;
+    background-color: darkslategrey;
+    color: white;
+    cursor: pointer;
+  }
+
+  .form button:hover {
+    background-color: whitesmoke;
+    color: black;
+  }
+  
+  h6{
+    margin-top: 10px;
+    text-align: center;
+    color: goldenrod;
+  }
