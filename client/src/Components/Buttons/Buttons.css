@@ -1,7 +1,16 @@
-.btn {
+#start, #end {
+    flex: auto;
+    margin-right: 20px; 
+    border: 1px solid darkgray;
+    font-size: large;
+    padding: 10px;
+}
+
+#signin, #login{
     float: left;
     border-radius: 0%;
     border: 1px solid darkgray;
+    font-size: larger;
     width: 50%;
     height: 75px;
 }

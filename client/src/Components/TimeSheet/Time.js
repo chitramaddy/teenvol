@@ -5,31 +5,25 @@ import API from "../../utils/API";
 var moment = require('moment');
 
 
-// let start;
-// let end;
-// let totalTime;
 let Date;
-
-
-// start = moment().format('hh:mm:ss');
-// console.log("the time is" + start);
-
-
-// end = moment();
-// totalTime = end - start;
 Date = moment().format('L');
+let fullname;
 
 class Time extends Component {
 
   state = {
-    showStart: false,
-    showEnd: false
-  }
+    //why do I need this here. but no 'key:value' is needed for the time component to render properly.
+    //If I take this off, timesheet is not working.
+  }  
 
   componentDidMount() {
     API.getUserTimeSheet()
       .then(res => {
-        console.log(res.data);
+        fullname = res.data.fullname;
+
+        //able to get the name to display only after i click on start/end time. Is it because it is in 'component did mount'?
+        console.log(fullname);
+
 
         const todaysCard = res.data.timecards.filter(timeCardItem => {
           return (timeCardItem.date === moment().format("ddd MMM D"))
@@ -38,20 +32,12 @@ class Time extends Component {
         console.log(todaysCard);
 
         this.setState({
-          startTime: todaysCard[0].startTime
+          startTime: todaysCard[0].startTime,
+          endTime: todaysCard[0].endTime    
         })
       })
       .catch(err => console.log(err))
   }
-
-  // handleTime = (startOrEnd) => {
-  //   API.setTime(moment().format("hh:mm:ss"), startOrEnd)
-  //   .then(res => {
-  //     this.setState({
-  //       startTime: res.data
-  //     })
-  //   }).catch(err=> console.log(err));
-  // }
 
   handleStart = () => {
     const time = moment().format("hh:mm:ss")
@@ -59,7 +45,7 @@ class Time extends Component {
       .then(res => {
         console.log(res.data)
         this.setState({
-          startTime: time
+          startTime: time       
         })
       })
       .catch(err => console.log(err));
@@ -75,30 +61,20 @@ class Time extends Component {
         })
       })
       .catch(err => console.log(err));
-  }
-
-
-  renderLog = () => {
-    if(this.state.showStart && this.state.showEnd){
-      return (<div><LogTime/></div>)
-
-    }
   } 
 
   render() {
     return (
       <div style={{ color: "white" }}>
-        <h3>Name: abc</h3>
+        <h3>Name: {fullname}</h3>
         <h3>Date: {Date}</h3>
         
-        <Buttons type="warning" disabled={this.state.startTime} onClick={this.handleStart}>Start Time</Buttons>
+        {(this.state.startTime !== "") ? <LogTime time={this.state.startTime}></LogTime> : "Start your timecard for today!"}
+        {(this.state.endTime !== "") ? <LogTime time={this.state.endTime}></LogTime> : ""}
+
+        <Buttons type="warning" id="start" disabled={this.state.startTime ? true : false}  onClick={this.handleStart}>Start Time</Buttons>
         
-        <Buttons type="warning" onClick={this.handleEnd}>End Time</Buttons>
-        
-        {(this.state.startTime !== "") ? <LogTime time={this.state.startTime} /> : "Start your timecard for today!"}
-        {this.state.endTime ? <LogTime time={this.state.endTime} /> : ""}
-  
-   
+        <Buttons type="warning" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}></Buttons>
         
 
       </div>

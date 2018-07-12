@@ -52,7 +52,21 @@ class SignUpForm extends Component {
     }
 
     API
-    .register({ username: this.state.email, password: this.state.password })
+    .register({ 
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      MI: this.state.MI,
+      grade: this.state.grade,
+      street: this.state.street,
+      city: this.state.city,
+      state: this.state.state,
+      phoneNo: this.state.phoneNo,
+      email: this.state.email,
+      username: this.state.email, 
+      password: this.state.password,
+      libraryCardNo: this.state.libraryCardNo,
+      graduationDate: this.state.graduationDate
+      })
     .then(res=> {
       console.log("is this "+res.data);
       this.setState({ success: res.data })

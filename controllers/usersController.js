@@ -64,8 +64,23 @@ module.exports = {
 
     register: function(req, res){
         console.log(req.body);
+        var user = new User({
+            username: req.body.email, 
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            MI: req.body.MI,
+            grade: req.body.grade,
+            address: req.body.address,
+            city: req.body.city,
+            state: req.body.state,
+            email: req.body.email,
+            phone_no: req. body.phoneNo,
+            library_card_no: req.body.libraryCardNo,
+            graduation_year: req.body.graduationDate
+        });
+        user.fullName();
         User
-        .register(new User({username: req.body.username}), req.body.password, function(err){
+        .register( user, req.body.password, function(err){
             if(err){
                 console.log('error while user register!', err);
 

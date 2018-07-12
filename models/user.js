@@ -74,12 +74,12 @@ const User = new Schema({
 //Custom methods
 
 User.methods.fullName = function(){
-    if(MI){
+    if(this.MI){
     this.fullname = this.firstname+" "+this.MI+" "+this.lastname;
-    return fullname;
+    return this.fullname;
     } else{
         this.fullname = this.firstname+" "+this.lastname;
-        return fullname;
+        return this.fullname;
     }
 }
 
