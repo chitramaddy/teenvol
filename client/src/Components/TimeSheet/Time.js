@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Buttons from '../Buttons';
 import LogTime from "./Log";
+import Logout from "../Logout";
 import API from "../../utils/API";
 var moment = require('moment');
 
@@ -65,17 +66,18 @@ class Time extends Component {
 
   render() {
     return (
+
       <div style={{ color: "white" }}>
         <h3>Name: {fullname}</h3>
         <h3>Date: {Date}</h3>
-        
+     
+        <Logout updateLogin={this.props.updateLogin}>Log Out</Logout>        
         {(this.state.startTime !== "") ? <LogTime time={this.state.startTime}></LogTime> : "Start your timecard for today!"}
         {(this.state.endTime !== "") ? <LogTime time={this.state.endTime}></LogTime> : ""}
 
         <Buttons type="warning" id="start" disabled={this.state.startTime ? true : false}  onClick={this.handleStart}>Start Time</Buttons>
         
-        <Buttons type="warning" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}></Buttons>
-        
+        <Buttons type="warning" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons>
 
       </div>
     )

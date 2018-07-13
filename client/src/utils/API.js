@@ -35,5 +35,9 @@ export default {
 
   setEndTime: function(endTime, date) {
     return axios.put("/api/users/timesheets", {endTime: endTime, date: date})
+  },
+
+  getReport: function(){
+    return axios.get('api/users/admin')
   }
 }

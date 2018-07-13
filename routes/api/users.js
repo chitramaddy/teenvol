@@ -26,8 +26,8 @@ router
 router
 .route('/logout')
 .get(function(req, res){
-    req.logout();
     console.log(req.user);
+    req.logout();    
     res.json(false);
 })
 
@@ -43,6 +43,10 @@ router
 .route('/register')
 .post(usersController.register);
 
+router
+.route('/admin')
+.get(usersController.getReport);
+
 
 // work with timesheets
 router
@@ -50,5 +54,7 @@ router
     .get(usersController.getTimeSheet)
     .post(usersController.setStartTime)
     .put(usersController.setEndTime)
+
+
 
 module.exports = router;

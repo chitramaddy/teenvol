@@ -9,7 +9,6 @@ import LoginForm from './Components/Forms/LoginForm';
 import API from './utils/API';
 import TimeSheet from './Components/TimeSheet/Time';
 
-
 class App extends Component {
 
   //The user log-in state is maintained in the App.js.
@@ -78,8 +77,8 @@ class App extends Component {
         <Wrapper>
           <Header />
           {/*write ternary operator to check status of isLoggedIn, if true render the time sheet, if false render this form below */}
-          <div style={{ height: "500px" }}>
-            {this.state.isLoggedIn ? <TimeSheet /> :
+          <div style={{ height: 500 }}>
+            {this.state.isLoggedIn ? <TimeSheet updateLogin={this.updateLogin}></TimeSheet> :
               <Container>
                 <Buttons type="dark" id="signin" onClick={() => this.showForm("SignUpForm")}>Sign In </Buttons>
                 <Buttons type="secondary" id="login" onClick={() => this.showForm("LoginForm")}>Log In </Buttons>
