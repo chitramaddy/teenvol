@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Buttons from '../Buttons';
 // import LogTime from "./Log";
-import Logout from '../Logout';
 import API from "../../utils/API";
 
 class Report extends Component {
