@@ -8,12 +8,14 @@ import SignUpForm from './Components/Forms/SignUpForm';
 import LoginForm from './Components/Forms/LoginForm';
 import API from './utils/API';
 import TimeSheet from './Components/TimeSheet/Time';
+import Report from "./Report/Report"
 
 class App extends Component {
 
   //The user log-in state is maintained in the App.js.
   state = {
     isLoggedIn: false,
+    isAdmin: false,
     currentForm: "LoginForm"
   }
 
@@ -37,9 +39,17 @@ class App extends Component {
       })
   }
   //Set "isLoggedIn" state to current login status.
-  updateLogin = (loginStatus) => {
+  updateLogin = (loginStatus, isAdmin) => {
+    console.log(isAdmin);
     this.setState({
-      isLoggedIn: loginStatus
+      isLoggedIn: loginStatus,
+      isAdmin: isAdmin ? true : false
+    })
+  }
+
+  checkAdmin = (trueOrFalse) => {
+    this.setState({
+      isAdmin: trueOrFalse
     })
   }
 
@@ -61,6 +71,15 @@ class App extends Component {
     }
   }
 
+  renderAdmin = () => {
+    console.log(this.state.isAdmin);
+    if (this.state.isAdmin) {
+      return <Report checkAdmin={this.checkAdmin} />
+    } else {
+      return <TimeSheet updateLogin={this.updateLogin}></TimeSheet> 
+    }
+  }
+
   // //function to render page depending on "isLoggedIn". 
   // renderPage = () => {
   //   if (!this.state.isLoggedIn) {
@@ -71,14 +90,14 @@ class App extends Component {
   // }
 
   render() {
-    console.log('login status is: ' + this.state.isLoggedIn)
     return (
       <div className="App">
         <Wrapper>
           <Header />
           {/*write ternary operator to check status of isLoggedIn, if true render the time sheet, if false render this form below */}
           <div style={{ height: 500 }}>
-            {this.state.isLoggedIn ? <TimeSheet updateLogin={this.updateLogin}></TimeSheet> :
+            {this.state.isLoggedIn ? this.renderAdmin()     
+              :
               <Container>
                 <Buttons type="dark" id="signin" onClick={() => this.showForm("SignUpForm")}>Sign In </Buttons>
                 <Buttons type="secondary" id="login" onClick={() => this.showForm("LoginForm")}>Log In </Buttons>

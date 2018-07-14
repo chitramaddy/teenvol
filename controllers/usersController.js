@@ -164,11 +164,13 @@ module.exports = {
         .User
         .find({})
         .sort({ date: 1 })
-        .then(dbModel => res.json(dbModel))
-        console.log(dbModel)
+        .then(dbModel => {
+          console.log(dbModel)
+          return res.json({reportData: dbModel, isAdmin: true})
+        })
         .catch(err => {
           console.log(err);
-          res.status(422).json(err)
+          return res.status(422).json(err)
         });
 
     }else{

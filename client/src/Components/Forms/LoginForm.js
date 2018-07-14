@@ -36,7 +36,7 @@ class LoginForm extends Component {
         email: "",
         password:""
       })
-      this.props.updateLogin(true);
+      this.props.updateLogin(true, res.data.isAdmin);
 
     }).catch(err => console.log(err));
 

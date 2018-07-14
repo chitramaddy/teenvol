@@ -38,6 +38,6 @@ export default {
   },
 
   getReport: function(){
-    return axios.get('api/users/admin')
+    return axios.get('api/users/report')
   }
 }

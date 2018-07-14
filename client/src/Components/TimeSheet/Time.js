@@ -15,6 +15,9 @@ class Time extends Component {
   state = {
     //why do I need this here. but no 'key:value' is needed for the time component to render properly.
     //If I take this off, timesheet is not working.
+    fullname: "",
+    startTime: "",
+    endTime: ""
   }  
 
   componentDidMount() {
@@ -34,7 +37,8 @@ class Time extends Component {
 
         this.setState({
           startTime: todaysCard[0].startTime,
-          endTime: todaysCard[0].endTime    
+          endTime: todaysCard[0].endTime,
+          fullname: fullname
         })
       })
       .catch(err => console.log(err))
@@ -69,7 +73,7 @@ class Time extends Component {
 
       <div style={{ color: "white" }}>
       <Logout updateLogin={this.props.updateLogin}>Log Out</Logout>  
-        <h3>Name: {fullname}</h3>
+        <h3>Name: {this.state.fullname}</h3>
         <h3>Date: {Date}</h3>
      
               
