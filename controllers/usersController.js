@@ -162,9 +162,10 @@ module.exports = {
     if (req.user.email === 'chitra@chitra.com') {
       db
         .User
-        .find(req.query)
+        .find({})
         .sort({ date: 1 })
         .then(dbModel => res.json(dbModel))
+        console.log(dbModel)
         .catch(err => {
           console.log(err);
           res.status(422).json(err)

@@ -68,10 +68,11 @@ class Time extends Component {
     return (
 
       <div style={{ color: "white" }}>
+      <Logout updateLogin={this.props.updateLogin}>Log Out</Logout>  
         <h3>Name: {fullname}</h3>
         <h3>Date: {Date}</h3>
      
-        <Logout updateLogin={this.props.updateLogin}>Log Out</Logout>        
+              
         {(this.state.startTime !== "") ? <LogTime time={this.state.startTime}></LogTime> : "Start your timecard for today!"}
         {(this.state.endTime !== "") ? <LogTime time={this.state.endTime}></LogTime> : ""}
 
