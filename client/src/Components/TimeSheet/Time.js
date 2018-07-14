@@ -13,8 +13,6 @@ let fullname;
 class Time extends Component {
 
   state = {
-    //why do I need this here. but no 'key:value' is needed for the time component to render properly.
-    //If I take this off, timesheet is not working.
     fullname: "",
     startTime: "",
     endTime: ""
@@ -24,8 +22,6 @@ class Time extends Component {
     API.getUserTimeSheet()
       .then(res => {
         fullname = res.data.fullname;
-
-        //able to get the name to display only after i click on start/end time. Is it because it is in 'component did mount'?
         console.log(fullname);
 
 
@@ -72,7 +68,7 @@ class Time extends Component {
     return (
 
       <div style={{ color: "white" }}>
-      <Logout updateLogin={this.props.updateLogin}>Log Out</Logout>  
+      <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>  
         <h3>Name: {this.state.fullname}</h3>
         <h3>Date: {Date}</h3>
      
@@ -88,25 +84,6 @@ class Time extends Component {
     )
   };
 }
-
-
-//Logout button displayed
-
-//today's date displayed
-
-// Full name displayed
-
-// option to select (shelving, task 2, task 3)
-
-//Start button clicked 
-//time now() is captured
-//time now() stored in state.start
-//time now() is displayed at Start Time (text area)
-
-//end button clicked
-//time now captured
-//time now stored at state.end
-//time now() displayed in End time
 
 //Total time spent (end time-start time) calculated
 //total time saved in state

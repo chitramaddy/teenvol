@@ -8,7 +8,7 @@ import SignUpForm from './Components/Forms/SignUpForm';
 import LoginForm from './Components/Forms/LoginForm';
 import API from './utils/API';
 import TimeSheet from './Components/TimeSheet/Time';
-import Report from "./Report/Report"
+import Report from "./Components/Report/Report";
 
 class App extends Component {
 
@@ -47,6 +47,15 @@ class App extends Component {
     })
   }
 
+  handleLogout = () => {
+    API.logout()
+      .then(res => {
+        console.log(res.data)
+        this.updateLogin(false, false);
+      })
+      .catch(err => console.log(err));
+  }
+
   checkAdmin = (trueOrFalse) => {
     this.setState({
       isAdmin: trueOrFalse
@@ -74,34 +83,24 @@ class App extends Component {
   renderAdmin = () => {
     console.log(this.state.isAdmin);
     if (this.state.isAdmin) {
-      return <Report checkAdmin={this.checkAdmin} />
+      return <Report checkAdmin={this.checkAdmin} handleLogout={this.handleLogout}/>
     } else {
-      return <TimeSheet updateLogin={this.updateLogin}></TimeSheet> 
+      return <TimeSheet updateLogin={this.updateLogin} handleLogout={this.handleLogout}></TimeSheet> 
     }
   }
-
-  // //function to render page depending on "isLoggedIn". 
-  // renderPage = () => {
-  //   if (!this.state.isLoggedIn) {
-  //     return <LoginForm updateLogin={this.updateLogin} />
-  //   } else {
-  //     return "new page displays here"
-  //   }
-  // }
 
   render() {
     return (
       <div className="App">
         <Wrapper>
           <Header />
-          {/*write ternary operator to check status of isLoggedIn, if true render the time sheet, if false render this form below */}
           <div style={{ height: 500 }}>
             {this.state.isLoggedIn ? this.renderAdmin()     
               :
               <Container>
                 <Buttons type="dark" id="signin" onClick={() => this.showForm("SignUpForm")}>Sign In </Buttons>
                 <Buttons type="secondary" id="login" onClick={() => this.showForm("LoginForm")}>Log In </Buttons>
-                {/*Function to renderpage depending on "isLoggedIn" state is called here*/}
+                {/*Function to renderform depending on "isLoggedIn" state is called here*/}
                 {this.renderForm()}
               </Container>
             }
