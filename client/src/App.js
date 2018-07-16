@@ -94,7 +94,7 @@ class App extends Component {
       <div className="App">
         <Wrapper>
           <Header />
-          <div style={{ height: 500 }}>
+          <div style={{ height:1000}}>
             {this.state.isLoggedIn ? this.renderAdmin()     
               :
               <Container>
