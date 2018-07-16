@@ -74,7 +74,7 @@ class LoginForm extends Component {
 
           <button onClick={this.handleLogin}>Submit</button>
 
-          <h6>Not registered yet? Click Sign In</h6> 
+          <h6>Not registered yet? Click Sign Up</h6> 
 
         </form>
   

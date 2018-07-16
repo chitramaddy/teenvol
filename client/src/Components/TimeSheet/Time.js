@@ -37,6 +37,7 @@ class Time extends Component {
         })
       })
       .catch(err => console.log(err))
+      console.log(fullname)
   }
 
   handleStart = () => {

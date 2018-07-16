@@ -98,7 +98,7 @@ class App extends Component {
             {this.state.isLoggedIn ? this.renderAdmin()     
               :
               <Container>
-                <Buttons type="dark" id="signin" onClick={() => this.showForm("SignUpForm")}>Sign In </Buttons>
+                <Buttons type="dark" id="signin" onClick={() => this.showForm("SignUpForm")}>Sign Up </Buttons>
                 <Buttons type="secondary" id="login" onClick={() => this.showForm("LoginForm")}>Log In </Buttons>
                 {/*Function to renderform depending on "isLoggedIn" state is called here*/}
                 {this.renderForm()}

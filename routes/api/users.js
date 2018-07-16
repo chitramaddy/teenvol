@@ -15,7 +15,7 @@ router
 .get(function(req, res){
     console.log(req.user);
     if(req.user.email === 'chitra@chitra.com'){
-        //If logged in, send back this flag and the fullname of user
+        
         res.json({isLoggedIn: true, isAdmin: true});
     }if(req.user){
         //If logged in, send back this flag and the fullname of user

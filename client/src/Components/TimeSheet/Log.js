@@ -1,6 +1,4 @@
 import React from "react";
-var moment = require('moment');
-
 
 const LogTime = props => {
   
