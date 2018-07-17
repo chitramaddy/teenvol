@@ -7,13 +7,13 @@ const User = new Schema({
     firstname: {
         type: String,
         trim: true,
-        // required: "First Name is required"
+        required: "First Name is required"
     },
 
     lastname: {
         type: String,
         trim: true,
-        // required: "Last Name is required"
+        required: "Last Name is required"
     },
 
     MI: String,
@@ -24,12 +24,12 @@ const User = new Schema({
 
     grade: {
         type: Number,
-        // required: "Grade is required"
+        required: "Grade is required"
     },
 
     address: {
         type: String,
-        // required: true
+        required: true
     },
     city: String,
 
@@ -45,7 +45,7 @@ const User = new Schema({
     library_card_no: {
         type: String,
         trim: true,
-        // required: "Please enter your library card number"
+        required: "Please enter your library card number"
     },
 
     graduation_year: {
@@ -54,8 +54,7 @@ const User = new Schema({
     },
     email: {
         type: String,
-        // unique: true,
-        // match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
 
     isAdmin: {
