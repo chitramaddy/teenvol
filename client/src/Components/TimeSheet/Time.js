@@ -25,8 +25,7 @@ class Time extends Component {
         console.log(res.data);
         fullname = res.data.fullname;
         console.log(fullname);
-
-        // 
+        
         const todaysCard = res.data.timecards.find(timeCardItem => {
           return (timeCardItem.date === moment().format("ddd MMM D"))
         })
@@ -36,7 +35,6 @@ class Time extends Component {
           endTime: todaysCard ? todaysCard.endTime : "",
           fullname: fullname
         })
-
 
       })
       .catch(err => console.log(err))
@@ -57,13 +55,17 @@ class Time extends Component {
   handleEnd = () => {
     const time = moment().format("hh:mm:ss a")
     const duration = moment.duration(moment().diff(moment(this.state.startTime, "hh:mm:ss a"))).asHours();
-    console.log(duration);
+    // let totalHoursFormatted = moment.duration(this.totalhours).asHours();
+    // totalHoursFormatted = moment.duration(totalHoursFormatted+duration).asHours();
+    // console.log(totalHoursFormatted);
+
     API.setEndTime(time, moment().format("ddd MMM D"), duration)
       .then(res => {
         console.log(res.data)
         this.setState({
           endTime: time,
-          duration: duration
+          duration: duration,
+          // totalhours: totalHoursFormatted
         })
       })
       .catch(err => console.log(err));

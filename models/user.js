@@ -21,7 +21,7 @@ const User = new Schema({
     fullname: {
         type: String
     },
-    
+
     grade: {
         type: String,
         // required: "Grade is required"
@@ -68,38 +68,32 @@ const User = new Schema({
         default: Date.now
     },
 
-    timecards: []
+    timecards: [],
 
+    totalhours: {
+        type: Number,
+        default: 0
+    }
 });
 
 //Custom methods
 
-User.methods.fullName = function(){
-    if(this.MI){
-    this.fullname = this.firstname+" "+this.MI+" "+this.lastname;
-    return this.fullname;
-    } else{
-        this.fullname = this.firstname+" "+this.lastname;
+User.methods.fullName = function () {
+    if (this.MI) {
+        this.fullname = this.firstname + " " + this.MI + " " + this.lastname;
+        return this.fullname;
+    } else {
+        this.fullname = this.firstname + " " + this.lastname;
         return this.fullname;
     }
 }
 
-User.methods.makeAdmin = function() {
-    if(this.email === "chitra@chitra.com"){
+User.methods.makeAdmin = function () {
+    if (this.email === "chitra@chitra.com") {
         this.isAdmin = true;
         return this.isAdmin;
     }
 }
-
-// User.methods.totalHours = function() {
-//     timecards.forEach(timecard=>
-//         moment.duration(timecard.endTime.diff(timecard.startTime)))
-
-//     const totalHours = timecards.reduce(function(totalHours, timecards) {
-//         return totalHours+timecards.duration;
-//       }, 0);
-//     }
-
 
 User.plugin(passportLocalMongoose);
 

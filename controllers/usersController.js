@@ -143,6 +143,9 @@ module.exports = {
           $set: {
             "timecards.$.endTime": req.body.endTime,
             "timecards.$.duration": req.body.duration
+          },
+          $inc: {
+            totalhours: req.body.duration
           }
         }).then(userInfo => {
           console.log(userInfo);

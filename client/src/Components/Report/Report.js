@@ -52,11 +52,13 @@ class Report extends Component {
               columns={[
                 {
                   Header: "First Name",
-                  accessor: "firstname"
+                  accessor: "firstname",
+                  sortable: true
                 },
                 {
                   Header: "Last Name",
-                  accessor: "lastname"
+                  accessor: "lastname",
+                  sortable: true
                 },
                 {
                   Header: "Grade",
@@ -73,6 +75,12 @@ class Report extends Component {
                   accessor: d => d.library_card_no
                 },
                 {
+                  Header: "Total Hours",
+                  id: "totalhours",
+                  accessor: d => d.totalhours,
+                  sortable: true
+                },
+                {
                   Header: "Created",
                   id: "Created_at",
                   accessor: d => d.Created_at
@@ -80,7 +88,7 @@ class Report extends Component {
               ]}
               defaultPageSize={10}
               filterable
-              sortable
+              
             />
           </div>
         }
