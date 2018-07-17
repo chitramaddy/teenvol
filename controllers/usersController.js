@@ -134,14 +134,15 @@ module.exports = {
   setEndTime: function (req, res) {
     console.log(req.user);
     // req.body should be {endTime: moment().format("hh:mm:ss"), date: moment.format("ddd MMM D")}
-
+    console.log(req.body);
     if (req.user) {
       User.updateOne({
         "_id": req.user._id,
         "timecards.date": req.body.date
       }, {
           $set: {
-            "timecards.$.endTime": req.body.endTime
+            "timecards.$.endTime": req.body.endTime,
+            "timecards.$.duration": req.body.duration
           }
         }).then(userInfo => {
           console.log(userInfo);
@@ -154,26 +155,6 @@ module.exports = {
       res.json({ loggedIn: false })
     }
   },
-
-  setDuration: function(req, res) {
-    console.log(req.user);
-    if(req.user){
-    User.updateOne({
-      "_id": req.user._id,
-      "timecards.date": req.body.date
-    }, {
-        $set: {
-          "timecards.$.duration": req.body.duration
-        }
-      }).then(userInfo => {
-        console.log(userInfo);
-        res.json(userInfo);
-      }).catch(err => {
-        console.log(err);
-        res.status(422).json(err);
-      })
-    }
-  }, 
 
   //Admin routes
   getReport: function (req, res) { 
@@ -198,4 +179,49 @@ module.exports = {
     }
   }
 
+  
+  // setEndTime: function (req, res) {
+  //   console.log(req.user);
+  //   // req.body should be {endTime: moment().format("hh:mm:ss"), date: moment.format("ddd MMM D")}
+
+  //   if (req.user) {
+  //     User.updateOne({
+  //       "_id": req.user._id,
+  //       "timecards.date": req.body.date
+  //     }, {
+  //         $set: {
+  //           "timecards.$.endTime": req.body.endTime,
+  //           "timecards.$.duration": req.body.duration
+  //         }
+  //       }).then(userInfo => {
+  //         console.log(userInfo);
+  //         res.json(userInfo);
+  //       }).catch(err => {
+  //         console.log(err);
+  //         res.status(422).json(err);
+  //       })
+  //   } else {
+  //     res.json({ loggedIn: false })
+  //   }
+  // },
+
+  // setDuration: function(req, res) {
+  //   console.log(req.user);
+  //   if(req.user){
+  //   User.updateOne({
+  //     "_id": req.user._id,
+  //     "timecards.date": req.body.date
+  //   }, {
+  //       $set: {
+  //         "timecards.$.duration": req.body.duration
+  //       }
+  //     }).then(userInfo => {
+  //       console.log(userInfo);
+  //       res.json(userInfo);
+  //     }).catch(err => {
+  //       console.log(err);
+  //       res.status(422).json(err);
+  //     })
+  //   }
+  // }, 
 };

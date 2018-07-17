@@ -22,30 +22,28 @@ class Time extends Component {
   componentDidMount() {
     API.getUserTimeSheet()
       .then(res => {
+        console.log(res.data);
         fullname = res.data.fullname;
         console.log(fullname);
 
-
-        const todaysCard = res.data.timecards.filter(timeCardItem => {
+        // 
+        const todaysCard = res.data.timecards.find(timeCardItem => {
           return (timeCardItem.date === moment().format("ddd MMM D"))
         })
 
-        console.log(todaysCard);
-
         this.setState({
-          startTime: todaysCard[0].startTime,
-          endTime: todaysCard[0].endTime,
-          fullname: fullname,
-          isLoaded: true,
-          duration: todaysCard[0].duration
-
+          startTime: todaysCard ? todaysCard.startTime : "",
+          endTime: todaysCard ? todaysCard.endTime : "",
+          fullname: fullname
         })
+
+
       })
       .catch(err => console.log(err))
   }
 
   handleStart = () => {
-    const time = moment().format("hh:mm:ss")
+    const time = moment().format("hh:mm:ss a")
     API.setStartTime(time, moment().format("ddd MMM D"))
       .then(res => {
         console.log(res.data)
@@ -57,33 +55,18 @@ class Time extends Component {
   }
 
   handleEnd = () => {
-    const time = moment().format("hh:mm:ss")
-    API.setEndTime(time, moment().format("ddd MMM D"))
+    const time = moment().format("hh:mm:ss a")
+    const duration = moment.duration(moment().diff(moment(this.state.startTime, "hh:mm:ss a"))).asHours();
+    console.log(duration);
+    API.setEndTime(time, moment().format("ddd MMM D"), duration)
       .then(res => {
-        console.log(res.data);
+        console.log(res.data)
         this.setState({
-          endTime: time
+          endTime: time,
+          duration: duration
         })
       })
       .catch(err => console.log(err));
-  }
-
-  handleDuration = ()=>{
-    if(this.state.startTime && this.state.endTime){
-        const start = moment(this.state.startTime, "hh:mm:ss a");
-        const end = moment(this.state.endTime, "hh:mm:ss a");
-        const x = moment.duration(end.diff(start));
-        console.log(x);     
-    
-    API.setDuration(x, moment().format("ddd MMM D"))
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          duration: x
-        })
-      })
-      .catch(err => console.log(err))
-    }
   }
 
   render() {
@@ -91,6 +74,7 @@ class Time extends Component {
 
       <div style={{ color: "white" }}>
         <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>
+
         {this.state.isLoaded === false
           ? <div>..Loading</div>
           : <h3>Name: {this.state.fullname}</h3>}
@@ -105,7 +89,7 @@ class Time extends Component {
 
         <Buttons type="warning" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons>
 
-        <Buttons type="warning" id="duration" onClick={this.handleDuration}>Duration</Buttons>
+        {/* <Buttons type="warning" id="duration" onClick={this.handleDuration}>Duration</Buttons>*/}
 
       </div>
     )
