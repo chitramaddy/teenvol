@@ -59,10 +59,4 @@ router
     .put(usersController.setEndTime)
     
 
-    router
-    .route('/duration')
-    .put(usersController.setDuration)
-
-
-
 module.exports = router;

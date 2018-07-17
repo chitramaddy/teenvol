@@ -75,9 +75,8 @@ class Time extends Component {
       <div style={{ color: "white" }}>
         <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>
 
-        {this.state.isLoaded === false
-          ? <div>..Loading</div>
-          : <h3>Name: {this.state.fullname}</h3>}
+
+        <h3>Name: {this.state.fullname}</h3>
         <h3>Date: {Date}</h3>
 
 
