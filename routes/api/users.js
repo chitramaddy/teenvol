@@ -57,6 +57,11 @@ router
     .get(usersController.getTimeSheet)
     .post(usersController.setStartTime)
     .put(usersController.setEndTime)
+    
+
+    router
+    .route('/duration')
+    .put(usersController.setDuration)
 
 
 

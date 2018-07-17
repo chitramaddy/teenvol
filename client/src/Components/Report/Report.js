@@ -8,14 +8,8 @@ import API from "../../utils/API";
 import ReactTable from "react-table";
 import Columns from "./Columns"
 import "react-table/react-table.css";
+var moment = require('moment');
 
-const range = len => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
 
 class Report extends Component {
   state = {
@@ -43,7 +37,6 @@ class Report extends Component {
 
 
   render() {
-
     return (
       <div>
         <h1 style={{ color: "white" }}>Time Sheet Report</h1>

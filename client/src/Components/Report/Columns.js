@@ -3,10 +3,7 @@ import React, { Component } from 'react';
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-const Columns = props => {
-
-  return (
-    [
+const Columns =[
       {
         Header: "First Name",
         accessor: "firstname"
@@ -40,7 +37,6 @@ const Columns = props => {
         accessor: d=> d.timecards
       }
     ]
-  )
-}
+  
 
 export default Columns;

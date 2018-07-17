@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
+var moment = require('moment');
 
 const User = new Schema({
     firstname: {
@@ -89,6 +90,16 @@ User.methods.makeAdmin = function() {
         return this.isAdmin;
     }
 }
+
+// User.methods.totalHours = function() {
+//     timecards.forEach(timecard=>
+//         moment.duration(timecard.endTime.diff(timecard.startTime)))
+
+//     const totalHours = timecards.reduce(function(totalHours, timecards) {
+//         return totalHours+timecards.duration;
+//       }, 0);
+//     }
+
 
 User.plugin(passportLocalMongoose);
 

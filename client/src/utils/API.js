@@ -37,6 +37,10 @@ export default {
     return axios.put("/api/users/timesheets", {endTime: endTime, date: date})
   },
 
+  setDuration: function(duration, date){
+    return axios.put('api/users/duration', {duration: duration, date: date})
+  },
+
   getReport: function(){
     return axios.get('api/users/report')
   }

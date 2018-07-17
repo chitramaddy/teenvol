@@ -155,6 +155,26 @@ module.exports = {
     }
   },
 
+  setDuration: function(req, res) {
+    console.log(req.user);
+    if(req.user){
+    User.updateOne({
+      "_id": req.user._id,
+      "timecards.date": req.body.date
+    }, {
+        $set: {
+          "timecards.$.duration": req.body.duration
+        }
+      }).then(userInfo => {
+        console.log(userInfo);
+        res.json(userInfo);
+      }).catch(err => {
+        console.log(err);
+        res.status(422).json(err);
+      })
+    }
+  }, 
+
   //Admin routes
   getReport: function (req, res) { 
     console.log(req.user);
