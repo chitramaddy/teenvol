@@ -22,7 +22,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //serve up static assets
-app.use(express.static('client/build'));
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build'));
+}
 //Add routes, both API and route to client/build
 app.use(routes);
 
