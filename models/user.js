@@ -23,7 +23,7 @@ const User = new Schema({
     },
 
     grade: {
-        type: String,
+        type: Number,
         // required: "Grade is required"
     },
 
