@@ -200,6 +200,7 @@ class SignUpForm extends Component {
           />
 
           <button onClick={this.handleSignUp}>Submit</button>
+          <br/>
         </form>
   
     )

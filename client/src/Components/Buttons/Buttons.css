@@ -9,7 +9,7 @@
 #signin, #login{
     float: left;
     border-radius: 0%;
-    border: 1px solid darkgray;
+    border: 1px solid rgba(11, 49, 4, 0.87);
     font-size: larger;
     width: 50%;
     height: 75px;

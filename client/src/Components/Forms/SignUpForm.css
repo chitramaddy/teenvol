@@ -2,6 +2,7 @@
     margin-top: 100px;
     min-height: 300px;  
     padding-top: 100px;  
+    background: #a12e11ee;
   }
   
   .form input {
@@ -9,8 +10,8 @@
     margin: auto;
     margin-bottom: 20px;
     width: 50%;
-    background: none;
-    color: white;
+    background: beige; */
+    color: black;
     font-size: 18px;
     border-bottom: 1 px;
   }
@@ -19,8 +20,10 @@
     display: flex;
     margin: auto;
     background-color: darkslategrey;
+    font-size: 18px;
     color: white;
     cursor: pointer;
+    margin-bottom: 15px;
   }
 
   .form button:hover {
@@ -33,3 +36,5 @@
     text-align: center;
     color: goldenrod;
   }
+
+  .error { border: 1px solid red; }

@@ -38,16 +38,16 @@ class LoginForm extends Component {
       })
       this.props.updateLogin(true, res.data.isAdmin);
 
-    }).catch(err => console.log(err));
+    }).catch(err => {
+      console.log(err);
+  });
 
      //empty out all of the input fields
      this.setState({
       email: "",
       password: ""
     });
-    //updateLogin function gets passed on from App.js. 'isLoggedIn' is set to true since the user is now signed in.
-    // this.props.updateLogin(true);
-  } 
+    } 
 
   //render the form to sign up, if the user has not signed up already. ie if 'isLoggedIn' from App.js is set to false.
   render() {
