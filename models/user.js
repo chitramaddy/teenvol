@@ -50,7 +50,7 @@ const User = new Schema({
 
     graduation_year: {
         type: Number,
-        // required: true
+        required: true
     },
     email: {
         type: String,

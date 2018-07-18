@@ -80,6 +80,7 @@ module.exports = {
     });
     user.fullName();
     user.makeAdmin();
+    console.log(user);
     User
       .register(user, req.body.password, function (err) {
         if (err) {
