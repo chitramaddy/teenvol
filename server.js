@@ -35,7 +35,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //connect to the Mongo DB
-mongoose.connect(process.env.MongoDB_URI || 'mongodb://localhost/teenvol');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/teenvol');
 
 app.listen(PORT, function(){
     console.log(`API Server now listening on PORT $(PORT)!`);
