@@ -12,7 +12,7 @@ class SignUpForm extends Component {
     MI: "",
     grade:"",
     email: "",
-    street: "",
+    address: "",
     city: "",
     state: "NJ",
     password: "",
@@ -57,7 +57,7 @@ class SignUpForm extends Component {
       lastname: this.state.lastname,
       MI: this.state.MI,
       grade: this.state.grade,
-      street: this.state.street,
+      address: this.state.address,
       city: this.state.city,
       state: this.state.state,
       phoneNo: this.state.phoneNo,
@@ -80,7 +80,7 @@ class SignUpForm extends Component {
       lastname: "",
       MI: "",
       grade: "",
-      street: "",
+      address: "",
       city: "",
       state: "",
       phoneNo: "",
@@ -136,8 +136,8 @@ class SignUpForm extends Component {
           />
 
           <input
-            value={this.state.street}
-            name="street"
+            value={this.state.address}
+            name="address"
             onChange={this.handleInputChange}
             type="text"
             placeholder="Address 1"

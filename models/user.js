@@ -29,7 +29,7 @@ const User = new Schema({
 
     address: {
         type: String,
-        required: true
+        required: false
     },
     city: String,
 
