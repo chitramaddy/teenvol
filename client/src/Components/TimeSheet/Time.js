@@ -75,23 +75,24 @@ class Time extends Component {
   render() {
     return (
 
-      <div>
-        <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>
+      <div id="time-wrap">
+        <Buttons type="dark" id="time-logout" onClick={this.props.handleLogout}>Log Out</Buttons>
+
+        <div className="clear timecard">
+
+        <h3 className="timecard-item" id="name">Hi, {this.state.fullname}</h3>
+        <h3 className="timecard-item date">Your time card for: {Date}</h3>
 
 
-        <h3>Name: {this.state.fullname}</h3>
-        <h3>Date: {Date}</h3>
+        {(this.state.startTime !== "") ? <LogTime className="timecard-item" time={this.state.startTime}>Start time: </LogTime> : <h2 className="timecard-item">"Start your timecard for today!"</h2>}
+        {(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.endTime}>End time: </LogTime> : ""}
 
 
-        {(this.state.startTime !== "") ? <LogTime time={this.state.startTime}></LogTime> : "Start your timecard for today!"}
-        {(this.state.endTime !== "") ? <LogTime time={this.state.endTime}></LogTime> : ""}
+        <Buttons type="danger"  className="timecard-item" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
 
+        <Buttons type="danger"  className="timecard-item" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons>
 
-        <Buttons type="warning" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
-
-        <Buttons type="warning" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons>
-
-        {/* <Buttons type="warning" id="duration" onClick={this.handleDuration}>Duration</Buttons>*/}
+        </div>
 
       </div>
     )

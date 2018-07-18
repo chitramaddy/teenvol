@@ -1,0 +1,36 @@
+.time-wrap{
+box-sizing: border-box;
+margin: auto;  
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+}
+
+#time-logout{
+    float: right;
+    margin: 30px;
+}
+
+div .clear{
+    clear: both;
+} 
+
+.timecard{
+    margin-top: 100px;
+    margin: 30px;
+    border: 1px solid grey;
+    padding: 50px;
+    
+}
+
+#name{
+    float: right;
+    margin: 2px;
+    text-align: right;
+    padding: 10px; 
+}
+
+#date{
+    clear: both
+}
+
+
+
