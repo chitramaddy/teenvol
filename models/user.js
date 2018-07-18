@@ -54,7 +54,8 @@ const User = new Schema({
     },
     email: {
         type: String,
-        match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
+        match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
+        required: true
     },
 
     isAdmin: {
