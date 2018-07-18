@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
+import "./Report.css"
 import Buttons from '../Buttons';
 // import LogTime from "./Log";
 import API from "../../utils/API";
@@ -38,14 +39,14 @@ class Report extends Component {
 
   render() {
     return (
-      <div>
-        <h1 style={{ color: "white" }}>Time Sheet Report</h1>
+      <div id="table-container">
+        <h1>Time Sheet Report</h1>
 
 
         {/*make the component wait to mount until the data makes it from server to client*/}
         {this.state.isLoaded === false
           ? <div>..Loading</div>
-          : <div style={{ color: "white" }}>
+          : <div>
 
             <ReactTable
               data={this.state.reportData}
@@ -70,7 +71,7 @@ class Report extends Component {
                   accessor: d => d.graduation_year
                 },
                 {
-                  Header: "library_card_no",
+                  Header: "Library Card No",
                   id: "library_card_no",
                   accessor: d => d.library_card_no
                 },
@@ -88,11 +89,13 @@ class Report extends Component {
               ]}
               defaultPageSize={10}
               filterable
+              className="-striped -highlight table"
               
             />
           </div>
         }
-        <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>
+        
+        <Buttons type="secondary" id="table-logout" onClick={this.props.handleLogout}>Log Out</Buttons>
 
       </div>
     )

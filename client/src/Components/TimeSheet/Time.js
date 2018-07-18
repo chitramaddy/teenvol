@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Time.css"
 import Buttons from '../Buttons';
 import LogTime from "./Log";
 import API from "../../utils/API";
@@ -74,7 +75,7 @@ class Time extends Component {
   render() {
     return (
 
-      <div style={{ color: "white" }}>
+      <div>
         <Buttons onClick={this.props.handleLogout}>Log Out</Buttons>
 
 
