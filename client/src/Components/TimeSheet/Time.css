@@ -1,36 +1,45 @@
-.time-wrap{
-box-sizing: border-box;
-margin: auto;  
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+.time-wrap {
+    box-sizing: border-box;
+    margin: auto;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#time-logout{
+#time-logout {
     float: right;
     margin: 30px;
 }
 
-div .clear{
+div .clear {
     clear: both;
-} 
+}
 
-.timecard{
+.timecard {
     margin-top: 100px;
     margin: 30px;
     border: 1px solid grey;
-    padding: 50px;
-    
+    justify-content: center;
 }
 
-#name{
+.timecard-item {
+    padding: 20px;
+}
+
+#name {
     float: right;
-    margin: 2px;
+    margin-top: 20px;
     text-align: right;
-    padding: 10px; 
 }
 
-#date{
-    clear: both
+#date .clear {
+    clear: both;
 }
 
+ul {
+    list-style-type: none;
+    margin-right: 100px;
+}
 
+li {
+    text-decoration-line: underline;
 
+}

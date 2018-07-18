@@ -56,17 +56,13 @@ class Time extends Component {
   handleEnd = () => {
     const time = moment().format("hh:mm:ss a")
     const duration = moment.duration(moment().diff(moment(this.state.startTime, "hh:mm:ss a"))).asHours();
-    // let totalHoursFormatted = moment.duration(this.totalhours).asHours();
-    // totalHoursFormatted = moment.duration(totalHoursFormatted+duration).asHours();
-    // console.log(totalHoursFormatted);
-
+    
     API.setEndTime(time, moment().format("ddd MMM D"), duration)
       .then(res => {
         console.log(res.data)
         this.setState({
           endTime: time,
-          duration: duration,
-          // totalhours: totalHoursFormatted
+          duration: duration
         })
       })
       .catch(err => console.log(err));
@@ -81,16 +77,23 @@ class Time extends Component {
         <div className="clear timecard">
 
         <h3 className="timecard-item" id="name">Hi, {this.state.fullname}</h3>
-        <h3 className="timecard-item date">Your time card for: {Date}</h3>
+        <h3 className="timecard-item date clear">Your time card for: {Date}</h3>
+        
+        <ul>
 
+        <li className="list-group-item list-group-item-dark"> {(this.state.startTime !== "") ? <LogTime className="timecard-item" time={this.state.startTime}>Start time: </LogTime> : <h2 className="timecard-item">"Start your timecard for today!"</h2>}</li>
+        
+        <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.endTime}>End time: </LogTime> : ""}</li>
 
-        {(this.state.startTime !== "") ? <LogTime className="timecard-item" time={this.state.startTime}>Start time: </LogTime> : <h2 className="timecard-item">"Start your timecard for today!"</h2>}
-        {(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.endTime}>End time: </LogTime> : ""}
+        <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.duration}>Duration: </LogTime> : ""}</li>
 
+        <br/>
 
-        <Buttons type="danger"  className="timecard-item" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
+        <li><Buttons type="danger"  className="timecard-item" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
 
-        <Buttons type="danger"  className="timecard-item" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons>
+        <Buttons type="danger"  className="timecard-item" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons> </li>
+
+        </ul>
 
         </div>
 
@@ -99,8 +102,5 @@ class Time extends Component {
   };
 }
 
-//Total time spent (end time-start time) calculated
-//total time saved in state
-//total time displayed at Total time spent
 
 export default Time;
