@@ -26,7 +26,7 @@ class Time extends Component {
         console.log(res.data);
         fullname = res.data.fullname;
         console.log(fullname);
-        
+
         const todaysCard = res.data.timecards.find(timeCardItem => {
           return (timeCardItem.date === moment().format("ddd MMM D"))
         })
@@ -34,6 +34,7 @@ class Time extends Component {
         this.setState({
           startTime: todaysCard ? todaysCard.startTime : "",
           endTime: todaysCard ? todaysCard.endTime : "",
+          duration: todaysCard ? todaysCard.duration : "",
           fullname: fullname
         })
 
@@ -56,7 +57,7 @@ class Time extends Component {
   handleEnd = () => {
     const time = moment().format("hh:mm:ss a")
     const duration = moment.duration(moment().diff(moment(this.state.startTime, "hh:mm:ss a"))).asHours();
-    
+
     API.setEndTime(time, moment().format("ddd MMM D"), duration)
       .then(res => {
         console.log(res.data)
@@ -68,38 +69,43 @@ class Time extends Component {
       .catch(err => console.log(err));
   }
 
-  render() {
-    return (
+  toFixed_norounding(n, p) {
+  var result = n.toFixed(p);
+  return result <= n ? result : (result - Math.pow(0.1, p)).toFixed(p);
+}
 
-      <div id="time-wrap">
-        <Buttons type="dark" id="time-logout" onClick={this.props.handleLogout}>Log Out</Buttons>
+render() {
+  return (
 
-        <div className="clear timecard">
+    <div id="time-wrap">
+      <Buttons type="dark" id="time-logout" onClick={this.props.handleLogout}>Log Out</Buttons>
+
+      <div className="clear timecard">
 
         <h3 className="timecard-item" id="name">Hi, {this.state.fullname}</h3>
         <h3 className="timecard-item date clear">Your time card for: {Date}</h3>
-        
+
         <ul>
 
-        <li className="list-group-item list-group-item-dark"> {(this.state.startTime !== "") ? <LogTime className="timecard-item" time={this.state.startTime}>Start time: </LogTime> : <h2 className="timecard-item">"Start your timecard for today!"</h2>}</li>
-        
-        <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.endTime}>End time: </LogTime> : ""}</li>
+          <li className="list-group-item list-group-item-dark"> {(this.state.startTime !== "") ? <LogTime className="timecard-item" time={this.state.startTime}>Start time: </LogTime> : <h2 className="timecard-item">"Start your timecard for today!"</h2>}</li>
 
-        <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.duration}>Duration: </LogTime> : ""}</li>
+          <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.endTime}>End time: </LogTime> : ""}</li>
 
-        <br/>
+          <li className="list-group-item list-group-item-dark">{(this.state.endTime !== "") ? <LogTime className="timecard-item" time={this.state.duration}>Duration: </LogTime> : ""}</li>
 
-        <li><Buttons type="danger"  className="timecard-item" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
+          <br />
 
-        <Buttons type="danger"  className="timecard-item" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons> </li>
+          <li><Buttons type="danger" className="timecard-item" id="start" disabled={this.state.startTime ? true : false} onClick={this.handleStart}>Start Time</Buttons>
+
+            <Buttons type="danger" className="timecard-item" id="end" disabled={this.state.endTime ? true : false} onClick={this.handleEnd}>End Time</Buttons> </li>
 
         </ul>
 
-        </div>
-
       </div>
-    )
-  };
+
+    </div>
+  )
+};
 }
 
 

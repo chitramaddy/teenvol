@@ -1,10 +1,9 @@
 .wrapper {
     margin: auto;
-    background: #17183B fixed center
-    url("../../images/mb-bg-fb-29.png") repeat;
-
+    /* background: #17183B fixed center
+    url("../../images/mb-bg-fb-29.png") repeat; */
+    background: url("../../images/mb-bg-fb-29.png") fixed center repeat;
     min-height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     max-width: 1200px;
-
 }
