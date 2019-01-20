@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+**Time Cards for Teen Volunteers at the South Brunswick Public Library**
+
+Checkout the deployed app [here](https://gentle-tundra-33865.herokuapp.com/)
+
+**To login use:**
+
+**username: guest@guest.com**
+**password: guest1**
+
+=========================================
+
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
