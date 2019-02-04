@@ -10,13 +10,13 @@
 }
 
 .header {
-  background-image: url("https://www.sbpl.info/wordpress/wp-content/themes/atahualpa353/images/header/header6.jpg");
+  background-image: url("../../images/header.jpg");
   background-size: cover;
   margin-bottom: 0%;
   overflow: hidden;
 }
 
-.horbor-2{
+.horbor-2 {
   width: 100%;
   height: 40px;
   background: #03491C;

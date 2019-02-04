@@ -1,68 +1,59 @@
-const db = require('../models');
-const User = require('../models/user');
+const db = require("../models");
+const User = require("../models/user");
 const moment = require("moment");
 
-
-
 module.exports = {
-  findAll: function (req, res) {
-    db
-      .User
-      .find(req.query)
+  findAll: function(req, res) {
+    db.User.find(req.query)
       .sort({ date: 1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
   },
 
-  findById: function (req, res) {
-    db
-      .User
-      .create(req.body)
+  findById: function(req, res) {
+    db.User.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
   },
-  create: function (req, res) {
-    db
-      .User
-      .create(req.body)
+  create: function(req, res) {
+    db.User.create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
   },
 
-  update: function (req, res) {
-    db
-      .User
-      .findOneAndUpdate({
+  update: function(req, res) {
+    db.User.findOneAndUpdate(
+      {
         _id: req.params.id
-      }, req.body)
+      },
+      req.body
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
   },
 
-  remove: function (req, res) {
-    db
-      .User
-      .findById({ _id: req.params.id })
+  remove: function(req, res) {
+    db.User.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .catch(err => {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
   },
 
-  register: function (req, res) {
+  register: function(req, res) {
     console.log(req.body);
     var user = new User({
       username: req.body.email,
@@ -81,66 +72,73 @@ module.exports = {
     user.fullName();
     user.makeAdmin();
     console.log(user);
-    User
-      .register(user, req.body.password, function (err) {
-        if (err) {
-          console.log('error while user register!', err);
+    User.register(user, req.body.password, function(err) {
+      if (err) {
+        console.log("error while user register!", err);
 
-          return res.status(422).json(err);
-        }
+        return res.status(422).json(err);
+      }
 
-        console.log('user registered')
-        res.json(true);
-      });
+      console.log("user registered");
+      res.json(true);
+    });
   },
 
-  getTimeSheet: function (req, res) {
-    console.log(req.user)
+  getTimeSheet: function(req, res) {
+    console.log(req.user);
     if (req.user) {
       User.findById(req.user._id)
-        .then(function (userInfo) {
+        .then(function(userInfo) {
           res.json(userInfo);
-        }).catch(function (err) {
+        })
+        .catch(function(err) {
           console.log(err);
           res.json(err);
-        })
+        });
     } else {
       res.json({ loggedIn: false });
     }
   },
 
-  setStartTime: function (req, res) {
-    console.log(req.body)
+  setStartTime: function(req, res) {
+    console.log(req.body);
     // req.body should be {startTime: moment().format("hh:mm:ss"), date: moment.format("ddd MMM D")}
     console.log(req.user);
     if (req.user) {
-      User.updateOne({
-        _id: req.user._id,
-      }, {
+      User.updateOne(
+        {
+          _id: req.user._id
+        },
+        {
           $push: {
             timecards: req.body
           }
-        }).then(userInfo => {
-          console.log(userInfo)
-          res.json(userInfo)
-        }).catch(err => {
+        }
+      )
+        .then(userInfo => {
+          console.log(userInfo);
+          res.json(userInfo);
+        })
+        .catch(err => {
           console.log(err);
           res.status(422).json(err);
-        })
+        });
     } else {
-      res.json({ loggedIn: false })
+      res.json({ loggedIn: false });
     }
   },
 
-  setEndTime: function (req, res) {
+  setEndTime: function(req, res) {
     console.log(req.user);
     // req.body should be {endTime: moment().format("hh:mm:ss"), date: moment.format("ddd MMM D")}
     console.log(req.body);
     if (req.user) {
-      User.updateOne({
-        "_id": req.user._id,
-        "timecards.date": req.body.date
-      }, {
+      User.updateOne(
+        {
+          _id: req.user._id,
+          "timecards.date": req.body.date
+        },
+        {
           $set: {
             "timecards.$.endTime": req.body.endTime,
             "timecards.$.duration": req.body.duration
@@ -148,84 +146,63 @@ module.exports = {
           $inc: {
             totalhours: req.body.duration
           }
-        }).then(userInfo => {
+        }
+      )
+        .then(userInfo => {
           console.log(userInfo);
           res.json(userInfo);
-        }).catch(err => {
+        })
+        .catch(err => {
           console.log(err);
           res.status(422).json(err);
-        })
+        });
     } else {
-      res.json({ loggedIn: false })
+      res.json({ loggedIn: false });
     }
   },
 
   //Admin routes
-  getReport: function (req, res) { 
+  getReport: function(req, res) {
     console.log(req.user);
 
-    if (req.user.email === 'chitra@chitra.com') {
-      db
-        .User
-        .find({})
+    if (req.user.email === "chitra@chitra.com") {
+      db.User.find({})
         .sort({ date: 1 })
         .then(dbModel => {
-          console.log(dbModel)
-          return res.json({reportData: dbModel, isAdmin: true})
+          console.log(dbModel);
+          return res.json({ reportData: dbModel, isAdmin: true });
         })
         .catch(err => {
           console.log(err);
-          return res.status(422).json(err)
+          return res.status(422).json(err);
         });
+    } else {
+      res.json({ isAdmin: false });
+    }
+  },
 
-    }else{
-      res.json({isAdmin: false})
+  setDuration: function(req, res) {
+    console.log(req.user);
+    if (req.user) {
+      User.updateOne(
+        {
+          _id: req.user._id,
+          "timecards.date": req.body.date
+        },
+        {
+          $set: {
+            "timecards.$.duration": req.body.duration
+          }
+        }
+      )
+        .then(userInfo => {
+          console.log(userInfo);
+          res.json(userInfo);
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(422).json(err);
+        });
     }
   }
-
-  
-  // setEndTime: function (req, res) {
-  //   console.log(req.user);
-  //   // req.body should be {endTime: moment().format("hh:mm:ss"), date: moment.format("ddd MMM D")}
-
-  //   if (req.user) {
-  //     User.updateOne({
-  //       "_id": req.user._id,
-  //       "timecards.date": req.body.date
-  //     }, {
-  //         $set: {
-  //           "timecards.$.endTime": req.body.endTime,
-  //           "timecards.$.duration": req.body.duration
-  //         }
-  //       }).then(userInfo => {
-  //         console.log(userInfo);
-  //         res.json(userInfo);
-  //       }).catch(err => {
-  //         console.log(err);
-  //         res.status(422).json(err);
-  //       })
-  //   } else {
-  //     res.json({ loggedIn: false })
-  //   }
-  // },
-
-  // setDuration: function(req, res) {
-  //   console.log(req.user);
-  //   if(req.user){
-  //   User.updateOne({
-  //     "_id": req.user._id,
-  //     "timecards.date": req.body.date
-  //   }, {
-  //       $set: {
-  //         "timecards.$.duration": req.body.duration
-  //       }
-  //     }).then(userInfo => {
-  //       console.log(userInfo);
-  //       res.json(userInfo);
-  //     }).catch(err => {
-  //       console.log(err);
-  //       res.status(422).json(err);
-  //     })
-  //   }
-  // }, 
 };

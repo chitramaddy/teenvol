@@ -37,4 +37,15 @@
     color: goldenrod;
   }
 
-  .error { border: 1px solid red; }
+  input :invalid{
+    background:white;
+  }
+  
+  .req {padding: 0 30px 0 50px;
+  color: whitesmoke;
+  max-height: 0;
+  transition: 0.28s;
+  overflow: hidden;
+  color: white;
+  font-style: italic;
+}
